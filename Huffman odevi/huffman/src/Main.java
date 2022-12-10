@@ -2,16 +2,14 @@ public class Main {
     public static void main(String[] args) {
 
 
+            String text = "Turan";
+            //function calling
+            HuffmanCode.hufmanOluştur(text);
 
-        Huffman huffman = new Huffman("aaataaaabbbbbbbccccdd");
 
-        String encodedText = huffman.encode();
-        System.out.println(encodedText);
 
-        huffman.printCodes();
 
-        String originalText = huffman.decode(encodedText);
-        System.out.println(originalText);
+
 
 
 
