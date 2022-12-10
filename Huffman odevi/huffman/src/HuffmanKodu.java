@@ -26,9 +26,9 @@ public class HuffmanKodu
             freq.put(c, freq.getOrDefault(c, 0) + 1);
         }
 
-        //here a point to note that the highest priority means the lowest frequency
+
         PriorityQueue<index> pq = new PriorityQueue<>(Comparator.comparingInt(l -> l.freq));
-        //loop iterate over the Map and returns a Set view of the mappings contained in this Map
+
         for (var entry: freq.entrySet())
         {
             pq.add(new index(entry.getKey(), entry.getValue()));
@@ -118,8 +118,7 @@ public class HuffmanKodu
 
     public static void main(String[] args) {
 
-
-
+        
         String text = "TuranAyhanVeriYapıları";
 
         HuffmanKodu.hufmanOluştur(text);
