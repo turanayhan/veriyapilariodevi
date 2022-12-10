@@ -3,7 +3,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-
+//veri yapıları ödevi github link
+//https://github.com/turanayhan/veriyapilariodevi
 
 public class HuffmanKodu
 {
@@ -56,7 +57,7 @@ public class HuffmanKodu
             //prints encoded string by getting characters
             sb.append(huffmanCode.get(c));
         }
-        System.out.println("\n"+"Karakterlerin karşılıkları:" + sb);
+        System.out.println("\n"+"Karakterlerin bcd karşılıkları:" + sb);
 
         System.out.print("\n"+"Kodlanmış karakterleri çözme: ");
         if (isLeaf(root))
@@ -113,6 +114,17 @@ public class HuffmanKodu
     {
         //her iki koşul da true değerini döndürürse true değerini döndürür
         return root.left == null && root.right == null;
+    }
+
+    public static void main(String[] args) {
+
+
+
+        String text = "TuranAyhanVeriYapıları";
+
+        HuffmanKodu.hufmanOluştur(text);
+
+
     }
 
 }
