@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 
 
 
-public class HuffmanCode
+public class HuffmanKodu
 {
 
     public static void hufmanOluştur(String text)
