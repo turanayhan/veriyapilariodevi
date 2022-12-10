@@ -2,8 +2,11 @@ public class Main {
     public static void main(String[] args) {
 
 
-            String text = "Turan";
-            //function calling
+
+
+
+            String text = "TuranAyhanVeriYapıları";
+
             HuffmanCode.hufmanOluştur(text);
 
 

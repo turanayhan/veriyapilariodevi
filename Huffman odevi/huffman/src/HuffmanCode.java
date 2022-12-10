@@ -2,62 +2,55 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
-//defining a class that creates nodes of the tree
 
-//main class
+
+
 public class HuffmanCode
 {
-    //function to build Huffman tree
+
     public static void hufmanOluştur(String text)
     {
-        //base case: if user does not provides string
+        //Kullanıcı veri girmiş mi kontrol yapılır
         if (text == null || text.length() == 0)
         {
             return;
         }
-        //count the frequency of appearance of each character and store it in a map
-        //creating an instance of the Map
+
+        //Map oluşturma
         Map<Character, Integer> freq = new HashMap<>();
-        //loop iterates over the string and converts the text into character array
+        //döngü dize üzerinde yinelenir ve metni karakter dizisine dönüştürür
         for (char c: text.toCharArray())
         {
-            //storing character and their frequency into Map by invoking the put() method
+            //put() yöntemini çağırarak karakterleri ve frekanslarını  kayıt yeri
             freq.put(c, freq.getOrDefault(c, 0) + 1);
         }
-        //create a priority queue that stores current nodes of the Huffman tree.
+
         //here a point to note that the highest priority means the lowest frequency
         PriorityQueue<index> pq = new PriorityQueue<>(Comparator.comparingInt(l -> l.freq));
         //loop iterate over the Map and returns a Set view of the mappings contained in this Map
         for (var entry: freq.entrySet())
         {
-            //creates a leaf node and add it to the queue
             pq.add(new index(entry.getKey(), entry.getValue()));
         }
-        //while loop runs until there is more than one node in the queue
+
         while (pq.size() != 1)
         {
-            //removing the nodes having the highest priority (the lowest frequency) from the queue
+            //en yüksek önceliğe (en düşük frekansa) sahip veri sıradan çıkarma
             index left = pq.poll();
             index right = pq.poll();
-            //create a new internal node with these two nodes as children and with a frequency equal to the sum of both nodes' frequencies. Add the new node to the priority queue.
-            //sum up the frequency of the nodes (left and right) that we have deleted
             int sum = left.freq + right.freq;
-            //adding a new internal node (deleted nodes i.e. right and left) to the queue with a frequency that is equal to the sum of both nodes
             pq.add(new index(null, sum, left, right));
         }
-        //root stores pointer to the root of Huffman Tree
         index root = pq.peek();
-        //trace over the Huffman tree and store the Huffman codes in a map
         Map<Character, String> huffmanCode = new HashMap<>();
         encodeData(root, "", huffmanCode);
-        //print the Huffman codes for the characters
         System.out.println("\n"+"Girilen karakterler: " + text);
         System.out.println("\n"+"Karakterlerin Huffman Kodları " + huffmanCode);
-        //prints the initial data
+        //ilk verileri yazdırır
 
-        //creating an instance of the StringBuilder class
+        //StringBuilder sınıfının bir örneğini oluşturma
         StringBuilder sb = new StringBuilder();
-        //loop iterate over the character array
+        //karakter dizisi üzerinde döngü yineleme
         for (char c: text.toCharArray())
         {
             //prints encoded string by getting characters
@@ -68,7 +61,6 @@ public class HuffmanCode
         System.out.print("\n"+"Kodlanmış karakterleri çözme: ");
         if (isLeaf(root))
         {
-            //special case: For input like a, aa, aaa, etc.
             while (root.freq-- > 0)
             {
                 System.out.print(root.ch);
@@ -76,7 +68,6 @@ public class HuffmanCode
         }
         else
         {
-            //traverse over the Huffman tree again and this time, decode the encoded string
             int index = -1;
             while (index < sb.length() - 1)
             {
@@ -84,15 +75,13 @@ public class HuffmanCode
             }
         }
     }
-    //traverse the Huffman Tree and store Huffman Codes in a Map
-    //function that encodes the data
+
     public static void encodeData(index root, String str, Map<Character, String> huffmanCode)
     {
         if (root == null)
         {
             return;
         }
-        //checks if the node is a leaf node or not
         if (isLeaf(root))
         {
             huffmanCode.put(root.ch, str.length() > 0 ? str : "1");
@@ -100,15 +89,15 @@ public class HuffmanCode
         encodeData(root.left, str + '0', huffmanCode);
         encodeData(root.right, str + '1', huffmanCode);
     }
-    //traverse the Huffman Tree and decode the encoded string function that decodes the encoded data
+
     public static int decodeData(index root, int index, StringBuilder sb)
     {
-        //checks if the root node is null or not
+
         if (root == null)
         {
             return index;
         }
-        //checks if the node is a leaf node or not
+
         if (isLeaf(root))
         {
             System.out.print(root.ch);
@@ -119,10 +108,10 @@ public class HuffmanCode
         index = decodeData(root, index, sb);
         return index;
     }
-    //function to check if the Huffman Tree contains a single node
+
     public static boolean isLeaf(index root)
     {
-        //returns true if both conditions return ture
+        //her iki koşul da true değerini döndürürse true değerini döndürür
         return root.left == null && root.right == null;
     }
 
